@@ -13,6 +13,14 @@ namespace GlownyShop.Models
         [Required]
         public string Email { get; set; }
 
+        [MaxLength(200)]
+        [Required]
+        public string FirstName { get; set; }
+
+        [MaxLength(200)]
+        [Required]
+        public string LastName { get; set; }
+        
         public bool IsActive { get; set; }
 
         public ICollection<AdminUserRole> AdminUserRoles { get; set; }

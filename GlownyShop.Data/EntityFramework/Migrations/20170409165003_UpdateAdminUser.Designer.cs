@@ -8,9 +8,10 @@ using GlownyShop.Data.EntityFramework;
 namespace GlownyShop.Data.Migrations
 {
     [DbContext(typeof(GlownyShopContext))]
-    partial class GlownyShopContextModelSnapshot : ModelSnapshot
+    [Migration("20170409165003_UpdateAdminUser")]
+    partial class UpdateAdminUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -38,7 +39,15 @@ namespace GlownyShop.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
                     b.Property<bool>("IsActive");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 

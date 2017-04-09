@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GlownyShop.Core\GlownyShop.Core.csproj" />
     <ProjectReference Include="..\GlownyShop.Models\GlownyShop.Models.csproj" />
   </ItemGroup>
 

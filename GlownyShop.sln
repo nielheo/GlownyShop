@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlownyShop.Models", "Glowny
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlownyShop.Data", "GlownyShop.Data\GlownyShop.Data.csproj", "{5969FB50-FAA4-442C-A595-B8A963DDDBE9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{921D8D0A-9995-401D-BB2F-1722FDBC9A82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlownyShop.Api", "GlownyShop.Api\GlownyShop.Api.csproj", "{6F0746D9-B548-44BC-B950-AF03EFF8621E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlownyShop.WebUI.Admin", "WebUI\GlownyShop.WebUI.Admin\GlownyShop.WebUI.Admin.csproj", "{16ED8F49-3CF5-42DB-B88C-6D0E7C103DA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlownyShop.Core", "GlownyShop.Core\GlownyShop.Core.csproj", "{068BF57F-31C6-4101-A2F4-6567E31E16EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,15 +25,16 @@ Global
 		{5969FB50-FAA4-442C-A595-B8A963DDDBE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5969FB50-FAA4-442C-A595-B8A963DDDBE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5969FB50-FAA4-442C-A595-B8A963DDDBE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16ED8F49-3CF5-42DB-B88C-6D0E7C103DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16ED8F49-3CF5-42DB-B88C-6D0E7C103DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16ED8F49-3CF5-42DB-B88C-6D0E7C103DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16ED8F49-3CF5-42DB-B88C-6D0E7C103DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F0746D9-B548-44BC-B950-AF03EFF8621E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F0746D9-B548-44BC-B950-AF03EFF8621E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F0746D9-B548-44BC-B950-AF03EFF8621E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F0746D9-B548-44BC-B950-AF03EFF8621E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{068BF57F-31C6-4101-A2F4-6567E31E16EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068BF57F-31C6-4101-A2F4-6567E31E16EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068BF57F-31C6-4101-A2F4-6567E31E16EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068BF57F-31C6-4101-A2F4-6567E31E16EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{16ED8F49-3CF5-42DB-B88C-6D0E7C103DA1} = {921D8D0A-9995-401D-BB2F-1722FDBC9A82}
 	EndGlobalSection
 EndGlobal

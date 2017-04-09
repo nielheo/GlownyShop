@@ -1,11 +1,13 @@
 ﻿using GlownyShop.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Logging;
 
 namespace GlownyShop.Data.EntityFramework
 {
-    internal class GlownyShopContext : DbContext
+    public class GlownyShopContext : DbContext
     {
+        public readonly ILogger _logger;
         private bool _migrations;
 
         public GlownyShopContext()
@@ -13,9 +15,10 @@ namespace GlownyShop.Data.EntityFramework
             _migrations = true;
         }
 
-        public GlownyShopContext(DbContextOptions options)
+        public GlownyShopContext(DbContextOptions options, ILogger<GlownyShopContext> logger)
             : base(options)
         {
+            _logger = logger;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
