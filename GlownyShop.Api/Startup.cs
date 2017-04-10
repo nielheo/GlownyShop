@@ -51,6 +51,7 @@ namespace GlownyShop.Api
             services.AddScoped<IDocumentExecuter, DocumentExecuter>();
 
             services.AddTransient<AdminRoleType>();
+            services.AddTransient<ViewerType>();
             var sp = services.BuildServiceProvider();
             services.AddScoped<ISchema>(_ => new GlownyShopSchema(type => (GraphType)sp.GetService(type)) { Query = sp.GetService<GlownyShopQuery>() });
         }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using GlownyShop.Core.Data;
 using GlownyShop.Models;
 using GraphQL.Types;
+using System.Threading.Tasks;
 
 namespace GlownyShop.Api.Models
 {
@@ -8,27 +10,13 @@ namespace GlownyShop.Api.Models
     {
         //public GlownyShopQuery() { }
 
-        public GlownyShopQuery(Core.Data.IAdminRoleRepository adminRoleRepository)
+        public GlownyShopQuery()
         {
             Name = "Query";
 
-            Field<ListGraphType<AdminRoleType>>(
-                "AdminRoles",
-                resolve: context => { return adminRoleRepository.GetAll().Result; }
-                );
-
-            Field<AdminRoleType>(
-                "AdminRole",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id", Description = "id of the droid" }
-                ),
-                resolve: context =>
-                {
-                    var id = context.GetArgument<int>("id");
-                    var adminRole = adminRoleRepository.Get(id).Result;
-                    //var mapped = mapper.Map<Droid>(droid);
-                    return adminRole;
-                }
+            Field<ViewerType>(
+                "viewer",
+                resolve: context => { return new Viewer(); }
                 );
             
         }
