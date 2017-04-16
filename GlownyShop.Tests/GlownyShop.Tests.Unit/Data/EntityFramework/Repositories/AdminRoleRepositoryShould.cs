@@ -5,6 +5,7 @@ using GlownyShop.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
+using System.Linq;
 using Xunit;
 
 namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
@@ -32,23 +33,23 @@ namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
             _adminRoleRepository = new AdminRoleRepository(glownyShopContext, repoLogger.Object);
         }
 
-        //[Fact]
-        //[Trait("test", "unit")]
-        //public async void Return3RowsGivenGetAll()
-        //{
-        //    // When
-        //    var glownyShopContext = new GlownyShopContext(_options, _dbLogger.Object);
-        //    var repoLogger = new Mock<ILogger<AdminRoleRepository>>();
-        //    var _adminRoleRepositoryAll = new AdminRoleRepository(glownyShopContext, repoLogger.Object);
-        //    var adminRoles = await _adminRoleRepositoryAll.GetAll();
+        [Fact]
+        [Trait("test", "unit")]
+        public async void Return3RowsGivenGetAll()
+        {
+            // When
+            var glownyShopContext = new GlownyShopContext(_options, _dbLogger.Object);
+            var repoLogger = new Mock<ILogger<AdminRoleRepository>>();
+            var _adminRoleRepositoryAll = new AdminRoleRepository(glownyShopContext, repoLogger.Object);
+            var adminRoles = await _adminRoleRepositoryAll.GetAll();
 
-        //    // Then
-        //    Assert.NotNull(adminRoles);
-        //    Assert.Equal(3, adminRoles.Count);
+            // Then
+            Assert.NotNull(adminRoles);
+            Assert.Equal(3, adminRoles.Count);
 
-        //    //CleanUp
-        //    var saved = await _adminRoleRepositoryAll.SaveChangesAsync();
-        //}
+            //CleanUp
+            var saved = await _adminRoleRepositoryAll.SaveChangesAsync();
+        }
 
         [Fact]
         [Trait("test", "unit")]
@@ -152,6 +153,30 @@ namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
                 var deletedDroid = await db.AdminRoles.FindAsync(9);
                 Assert.Null(deletedDroid);
             }
+        }
+
+        [Fact]
+        [Trait("test", "unit")]
+        public async void Return1AdminUsersGivenIdOf0()
+        {
+            // When
+            var adminRole1 = await _adminRoleRepository.Get(0, include: "AdminUserRoles.AdminUser");
+            
+            // Then
+            Assert.NotNull(adminRole1);
+            Assert.Equal(1, adminRole1.AdminUserRoles.Select(u=>u.AdminUser).Count());
+        }
+
+        [Fact]
+        [Trait("test", "unit")]
+        public async void Return2AdminUsersGivenIdOf2()
+        {
+            // When
+            var adminRole1 = await _adminRoleRepository.Get(2, include: "AdminUserRoles.AdminUser");
+
+            // Then
+            Assert.NotNull(adminRole1);
+            Assert.Equal(2, adminRole1.AdminUserRoles.Select(u => u.AdminUser).Count());
         }
     }
 }
