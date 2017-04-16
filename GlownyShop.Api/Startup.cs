@@ -37,6 +37,8 @@ namespace GlownyShop.Api
 
             services.AddScoped<GlownyShopQuery>();
             services.AddTransient<IAdminRoleRepository, AdminRoleRepository>();
+            services.AddTransient<IAdminUserRepository, AdminUserRepository>();
+
 
             //if (Env.IsEnvironment("Test"))
             //{
@@ -45,7 +47,7 @@ namespace GlownyShop.Api
             //}
             //else
             //{
-                services.AddDbContext<GlownyShopContext>(options =>
+            services.AddDbContext<GlownyShopContext>(options =>
                     options.UseSqlServer(Configuration["ConnectionStrings:GlownyShopDatabaseConnection"]));
             //}
             services.AddScoped<IDocumentExecuter, DocumentExecuter>();
