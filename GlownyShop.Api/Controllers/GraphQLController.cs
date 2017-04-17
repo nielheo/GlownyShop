@@ -52,7 +52,7 @@ namespace GlownyShop.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError("Document exexuter exception", ex);
+                _logger.LogError("Document executer exception", ex);
                 return BadRequest(ex);
             }
         }

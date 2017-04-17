@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A19AE13A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlownyShop.Tests.Unit", "GlownyShop.Tests\GlownyShop.Tests.Unit\GlownyShop.Tests.Unit.csproj", "{7D39DDC2-1CFD-40BD-94A3-5E92894E686F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlownyShop.Tests.Integration", "GlownyShop.Tests\GlownyShop.Tests.Integration\GlownyShop.Tests.Integration.csproj", "{C0A84A80-2B84-4A79-AD84-33AE53829A3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,11 +43,16 @@ Global
 		{7D39DDC2-1CFD-40BD-94A3-5E92894E686F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D39DDC2-1CFD-40BD-94A3-5E92894E686F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D39DDC2-1CFD-40BD-94A3-5E92894E686F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A84A80-2B84-4A79-AD84-33AE53829A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A84A80-2B84-4A79-AD84-33AE53829A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A84A80-2B84-4A79-AD84-33AE53829A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A84A80-2B84-4A79-AD84-33AE53829A3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7D39DDC2-1CFD-40BD-94A3-5E92894E686F} = {A19AE13A-5DD6-4FDC-910C-3AEB829079AC}
+		{C0A84A80-2B84-4A79-AD84-33AE53829A3D} = {A19AE13A-5DD6-4FDC-910C-3AEB829079AC}
 	EndGlobalSection
 EndGlobal

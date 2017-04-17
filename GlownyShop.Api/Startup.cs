@@ -20,10 +20,11 @@ namespace GlownyShop.Api
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+            Env = env;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -40,16 +41,16 @@ namespace GlownyShop.Api
             services.AddTransient<IAdminUserRepository, AdminUserRepository>();
 
 
-            //if (Env.IsEnvironment("Test"))
-            //{
-            //    services.AddDbContext<GlownyShopContext>(options =>
-            //        options.UseInMemoryDatabase(databaseName: "StarWars"));
-            //}
-            //else
-            //{
-            services.AddDbContext<GlownyShopContext>(options =>
+            if (Env.IsEnvironment("Test"))
+            {
+                services.AddDbContext<GlownyShopContext>(options =>
+                    options.UseInMemoryDatabase(databaseName: "GlownyShop"));
+            }
+            else
+            {
+                services.AddDbContext<GlownyShopContext>(options =>
                     options.UseSqlServer(Configuration["ConnectionStrings:GlownyShopDatabaseConnection"]));
-            //}
+            }
             services.AddScoped<IDocumentExecuter, DocumentExecuter>();
 
             services.AddTransient<AdminRoleType>();
