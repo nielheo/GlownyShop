@@ -35,7 +35,11 @@ namespace GlownyShop.Api.Controllers
         {
             if (query == null) { throw new ArgumentNullException(nameof(query)); }
 
-            var executionOptions = new ExecutionOptions { Schema = _schema, Query = query.Query };
+            var executionOptions = new ExecutionOptions {
+                Schema = _schema,
+                Query = query.Query,
+                UserContext = new GraphQLUserContext()
+            };
 
             try
             {

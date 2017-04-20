@@ -1,4 +1,5 @@
-﻿using GraphQL.Types;
+﻿using GraphQL;
+using GraphQL.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace GlownyShop.Api.Models
             Field<ListGraphType<AdminRoleType>>(
                 "AdminRoles",
                 description: "List of Roles for Admin Site",
-                resolve: context => { return adminRoleRepository.GetAll().Result; }
+                resolve: context => {
+                    var userContext = context.UserContext.As<GraphQLUserContext>();
+                    return adminRoleRepository.GetAll().Result; }
                 );
 
             Field<AdminRoleType>(
