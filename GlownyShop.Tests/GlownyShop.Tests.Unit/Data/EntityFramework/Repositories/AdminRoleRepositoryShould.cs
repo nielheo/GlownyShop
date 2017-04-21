@@ -74,14 +74,17 @@ namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
             Assert.NotNull(adminRole1);
             Assert.Equal("User Admin", adminRole1.Name);
         }
-               
+
         [Fact]
         [Trait("test", "unit")]
         public async void AddNewAdminRole()
         {
             // Given
-            var adminRoleNormalUser = new AdminRole { Id = 9,
-                Name = "Normal User" };
+            var adminRoleNormalUser = new AdminRole
+            {
+                Id = 9,
+                Name = "Normal User"
+            };
 
             // When
             _adminRoleRepository.Add(adminRoleNormalUser);
@@ -161,10 +164,10 @@ namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
         {
             // When
             var adminRole1 = await _adminRoleRepository.Get(0, include: "AdminUserRoles.AdminUser");
-            
+
             // Then
             Assert.NotNull(adminRole1);
-            Assert.Equal(1, adminRole1.AdminUserRoles.Select(u=>u.AdminUser).Count());
+            Assert.Equal(1, adminRole1.AdminUserRoles.Select(u => u.AdminUser).Count());
         }
 
         [Fact]

@@ -1,16 +1,17 @@
 ﻿using GlownyShop.Api.Models;
+using GlownyShop.Core.Data;
 using GlownyShop.Data.EntityFramework;
+using GlownyShop.Data.EntityFramework.Repositories;
 using GlownyShop.Data.EntityFramework.Seed;
 using GraphQL;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using GlownyShop.Core.Data;
-using GlownyShop.Data.EntityFramework.Repositories;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace GlownyShop.Api
 {
@@ -40,7 +41,6 @@ namespace GlownyShop.Api
             services.AddTransient<IAdminRoleRepository, AdminRoleRepository>();
             services.AddTransient<IAdminUserRepository, AdminUserRepository>();
 
-
             if (Env.IsEnvironment("Test"))
             {
                 services.AddDbContext<GlownyShopContext>(options =>
@@ -49,11 +49,12 @@ namespace GlownyShop.Api
             else
             {
                 services.AddDbContext<GlownyShopContext>(options =>
-                    options.UseSqlServer(Configuration["ConnectionStrings:GlownyShopDatabaseConnection"]));
+                    options.UseMySQL(Configuration["ConnectionStrings:GlownyShopDatabaseConnection"]));
             }
             services.AddScoped<IDocumentExecuter, DocumentExecuter>();
 
             services.AddTransient<AdminRoleType>();
+            services.AddTransient<AdminUserType>();
             services.AddTransient<ViewerType>();
             var sp = services.BuildServiceProvider();
             services.AddScoped<ISchema>(_ => new GlownyShopSchema(type => (GraphType)sp.GetService(type)) { Query = sp.GetService<GlownyShopQuery>() });

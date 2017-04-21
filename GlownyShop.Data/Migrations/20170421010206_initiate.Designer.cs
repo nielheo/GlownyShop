@@ -8,14 +8,13 @@ using GlownyShop.Data.EntityFramework;
 namespace GlownyShop.Data.Migrations
 {
     [DbContext(typeof(GlownyShopContext))]
-    [Migration("20170409165003_UpdateAdminUser")]
-    partial class UpdateAdminUser
+    [Migration("20170421010206_initiate")]
+    partial class initiate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.1")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.1.1");
 
             modelBuilder.Entity("GlownyShop.Models.AdminRole", b =>
                 {

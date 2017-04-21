@@ -16,8 +16,6 @@ namespace GlownyShop.Tests.Unit.Data.InMemory
             _adminRoleRepository = new AdminRoleRepository(logger.Object);
         }
 
-        
-
         [Fact]
         [Trait("test", "unit")]
         public async void ReturnSuperAdminGivenIdof0()

@@ -1,10 +1,10 @@
 ﻿using GlownyShop.Core.Data;
+using GlownyShop.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GlownyShop.Models;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace GlownyShop.Data.InMemory
 {
@@ -12,7 +12,9 @@ namespace GlownyShop.Data.InMemory
     {
         private readonly ILogger _logger;
 
-        public AdminRoleRepository() { }
+        public AdminRoleRepository()
+        {
+        }
 
         public AdminRoleRepository(ILogger<AdminRoleRepository> logger)
         {

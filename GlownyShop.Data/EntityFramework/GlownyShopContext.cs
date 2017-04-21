@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace GlownyShop.Data.EntityFramework
 {
@@ -25,7 +26,9 @@ namespace GlownyShop.Data.EntityFramework
         {
             if (_migrations)
             {
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=GlownyShop;Integrated Security=SSPI;integrated security=true;MultipleActiveResultSets=True;");
+                //optionsBuilder.UseMySQL("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=GlownyShop;Integrated Security=SSPI;integrated security=true;MultipleActiveResultSets=True;");
+
+                optionsBuilder.UseMySQL("server=localhost;userid=root;pwd=123qwe!@#;port=3306;database=glownyshop;sslmode=none;");
             }
 
             base.OnConfiguring(optionsBuilder);
@@ -43,7 +46,7 @@ namespace GlownyShop.Data.EntityFramework
             // adminUsers
             modelBuilder.Entity<AdminUser>().HasKey(c => c.Id);
             modelBuilder.Entity<AdminUser>().Property(e => e.Id).ValueGeneratedOnAdd();
-                        
+
             // adminUser-Roles
             modelBuilder.Entity<AdminUserRole>().HasKey(t => new { t.AdminUserId, t.AdminRoleId });
 

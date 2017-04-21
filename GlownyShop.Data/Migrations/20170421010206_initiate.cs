@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GlownyShop.Data.Migrations
 {
@@ -26,9 +23,11 @@ namespace GlownyShop.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySQL:AutoIncrement", true),
                     Email = table.Column<string>(maxLength: 200, nullable: false),
-                    IsActive = table.Column<bool>(nullable: false)
+                    FirstName = table.Column<string>(maxLength: 200, nullable: false),
+                    IsActive = table.Column<bool>(nullable: false),
+                    LastName = table.Column<string>(maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {

@@ -6,7 +6,9 @@ namespace GlownyShop.Data.EntityFramework.Repositories
 {
     public class AdminRoleRepository : BaseRepository<AdminRole, int>, IAdminRoleRepository
     {
-        public AdminRoleRepository() { }
+        public AdminRoleRepository()
+        {
+        }
 
         public AdminRoleRepository(GlownyShopContext db, ILogger<AdminRoleRepository> logger)
             : base(db, logger)

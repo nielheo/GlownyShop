@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using GlownyShop.Core.Data;
-using GlownyShop.Models;
-using GraphQL.Types;
-using System.Threading.Tasks;
+﻿using GraphQL.Types;
 
 namespace GlownyShop.Api.Models
 {
@@ -18,7 +14,6 @@ namespace GlownyShop.Api.Models
                 "viewer",
                 resolve: context => { return new Viewer(); }
                 );
-            
         }
     }
 }

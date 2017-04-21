@@ -20,7 +20,7 @@ namespace GlownyShop.Models
         [MaxLength(200)]
         [Required]
         public string LastName { get; set; }
-        
+
         public bool IsActive { get; set; }
 
         public ICollection<AdminUserRole> AdminUserRoles { get; set; }

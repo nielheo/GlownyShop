@@ -78,7 +78,8 @@ namespace GlownyShop.Data.EntityFramework.Seed
                 Name = "User Admin",
                 AdminUserRoles = new List<AdminUserRole>
                 {
-                    new AdminUserRole { AdminUser = AdminUserUserAdmin }
+                    new AdminUserRole { AdminUser = AdminUserUserAdmin },
+                    new AdminUserRole { AdminUser = AdminUserClientAdmin2 }
                 }
             };
             var AdminRoleClientAdmin = new AdminRole

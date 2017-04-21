@@ -1,6 +1,4 @@
-﻿using GlownyShop.Data.EntityFramework.Seed;
-
-namespace GlownyShop.Data.EntityFramework.Workaround
+﻿namespace GlownyShop.Data.EntityFramework.Workaround
 {
     public static class Program
     {
