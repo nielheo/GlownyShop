@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GlownyShop.Core.Logic
 {
-    public class SecurityService
+    public class SecurityService : ISecurityService
     {
         private static string GetSalt()
         {
@@ -112,6 +112,10 @@ namespace GlownyShop.Core.Logic
                 password = null;
             }
         }
-        
+
+        public bool ValidateAdminUser(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

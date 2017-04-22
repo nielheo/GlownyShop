@@ -8,9 +8,10 @@ using GlownyShop.Data.EntityFramework;
 namespace GlownyShop.Data.Migrations
 {
     [DbContext(typeof(GlownyShopContext))]
-    partial class GlownyShopContextModelSnapshot : ModelSnapshot
+    [Migration("20170422101530_AddUniqueConstraint_AdminUserEmail")]
+    partial class AddUniqueConstraint_AdminUserEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");

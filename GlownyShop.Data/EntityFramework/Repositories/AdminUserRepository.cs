@@ -4,72 +4,25 @@ using System.Threading.Tasks;
 using GlownyShop.Core.Data;
 using GlownyShop.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace GlownyShop.Data.EntityFramework.Repositories
 {
-    public class AdminUserRepository : IAdminUserRepository
+    public class AdminUserRepository : BaseRepository<AdminUser, int>, IAdminUserRepository
     {
         public AdminUserRepository()
         {
         }
 
-        public AdminUserRepository(ILogger<AdminUserRepository> logger)
+        public AdminUserRepository(GlownyShopContext db, ILogger<AdminUserRepository> logger)
+             : base(db, logger)
         {
         }
 
-        public AdminUser Add(AdminUser entity)
+        public Task<AdminUser> GetByEmail(string email)
         {
-            throw new NotImplementedException();
-        }
-
-        public void AddRange(IEnumerable<AdminUser> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<AdminUser> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<AdminUser> Get(int id, string include)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<AdminUser> Get(int id, IEnumerable<string> includes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<AdminUser>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<AdminUser>> GetAll(string include)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<AdminUser>> GetAll(IEnumerable<string> includes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(AdminUser entity)
-        {
-            throw new NotImplementedException();
+            _logger.LogInformation("Get AdminUser with email = {email}", email);
+            return _db.Set<AdminUser>().SingleOrDefaultAsync(c => c.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase));
         }
     }
 }

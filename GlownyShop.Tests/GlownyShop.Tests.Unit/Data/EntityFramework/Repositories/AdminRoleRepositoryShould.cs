@@ -22,7 +22,7 @@ namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
             _dbLogger = new Mock<ILogger<GlownyShopContext>>();
             // https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/in-memory
             _options = new DbContextOptionsBuilder<GlownyShopContext>()
-                .UseInMemoryDatabase(databaseName: "GlownyShop")
+                .UseInMemoryDatabase(databaseName: "GlownyShop_AdminRole")
                 .Options;
             using (var context = new GlownyShopContext(_options, _dbLogger.Object))
             {

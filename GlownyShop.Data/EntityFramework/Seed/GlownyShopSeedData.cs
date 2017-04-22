@@ -1,4 +1,5 @@
-﻿using GlownyShop.Models;
+﻿using GlownyShop.Core.Logic;
+using GlownyShop.Models;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
                 FirstName = "Super",
                 LastName = "Admin",
                 Email = "superadmin@glowny-shop.com",
+                Password = SecurityService.GenerateHashedPassword("P@ssw0rd"),
                 IsActive = true,
             };
 
@@ -27,6 +29,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
                 FirstName = "User",
                 LastName = "Admin",
                 Email = "useradmin@glowny-shop.com",
+                Password = SecurityService.GenerateHashedPassword("P@ssw0rd"),
                 IsActive = true,
             };
 
@@ -36,6 +39,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
                 FirstName = "Client",
                 LastName = "Admin 1",
                 Email = "clientadmin1@glowny-shop.com",
+                Password = SecurityService.GenerateHashedPassword("P@ssw0rd"),
                 IsActive = true,
             };
 
@@ -45,6 +49,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
                 FirstName = "Client",
                 LastName = "Admin 2",
                 Email = "clientadmin2@glowny-shop.com",
+                Password = SecurityService.GenerateHashedPassword("P@ssw0rd"),
                 IsActive = true,
             };
 
