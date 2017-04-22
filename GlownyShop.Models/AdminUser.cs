@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +12,7 @@ namespace GlownyShop.Models
 
         [MaxLength(200)]
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [MaxLength(200)]
@@ -20,6 +22,12 @@ namespace GlownyShop.Models
         [MaxLength(200)]
         [Required]
         public string LastName { get; set; }
+
+        [MaxLength(200)]
+        [Required]
+        [DataType(DataType.Password)]
+        [DefaultValue("")]
+        public string Password { get; set; }
 
         public bool IsActive { get; set; }
 

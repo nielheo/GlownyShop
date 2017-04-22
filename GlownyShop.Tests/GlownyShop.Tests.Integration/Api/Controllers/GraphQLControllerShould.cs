@@ -44,7 +44,7 @@ namespace GlownyShop.Tests.Integration.Api.Controllers
         {
             // Given
             var query = @"{
-                ""query"": ""query { viewer { adminRole(id:0) { id name } } }""
+                ""query"": ""query { viewer { adminRoles(id:0) { id name } } }""
             }";
             var content = new StringContent(query, Encoding.UTF8, "application/json");
 
@@ -62,7 +62,7 @@ namespace GlownyShop.Tests.Integration.Api.Controllers
         {
             // Given
             var query = @"{
-                ""query"": ""query { viewer { adminRole(id:1) { id name } } }""
+                ""query"": ""query { viewer { adminRoles(id:1) { id name } } }""
             }";
             var content = new StringContent(query, Encoding.UTF8, "application/json");
 
@@ -80,7 +80,7 @@ namespace GlownyShop.Tests.Integration.Api.Controllers
         {
             // Given
             var query = @"{
-                ""query"": ""query { viewer { adminRole(id:2) { id name } } }""
+                ""query"": ""query { viewer { adminRoles(id:2) { id name } } }""
             }";
             var content = new StringContent(query, Encoding.UTF8, "application/json");
 
