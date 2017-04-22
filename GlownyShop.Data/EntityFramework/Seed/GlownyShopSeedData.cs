@@ -15,7 +15,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
             // admin users
             var AdminUserSuperAdmin = new AdminUser
             {
-                //Id = 0,
+                Id = 0,
                 FirstName = "Super",
                 LastName = "Admin",
                 Email = "superadmin@glowny-shop.com",
@@ -25,7 +25,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
 
             var AdminUserUserAdmin = new AdminUser
             {
-                //Id = 1,
+                Id = 1,
                 FirstName = "User",
                 LastName = "Admin",
                 Email = "useradmin@glowny-shop.com",
@@ -35,7 +35,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
 
             var AdminUserClientAdmin1 = new AdminUser
             {
-                //Id = 2,
+                Id = 2,
                 FirstName = "Client",
                 LastName = "Admin 1",
                 Email = "clientadmin1@glowny-shop.com",
@@ -45,7 +45,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
 
             var AdminUserClientAdmin2 = new AdminUser
             {
-                //Id = 2,
+                Id = 3,
                 FirstName = "Client",
                 LastName = "Admin 2",
                 Email = "clientadmin2@glowny-shop.com",

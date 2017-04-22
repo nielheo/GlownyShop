@@ -34,5 +34,10 @@ namespace GlownyShop.Core.Logic
 
             return _adminUserRepository.Get(adminUser.Id);
         }
+
+        public Task<AdminUser> UpdateAdminUser(AdminUser adminUser)
+        {
+            return _adminUserRepository.Get(adminUser.Id);
+        }
     }
 }

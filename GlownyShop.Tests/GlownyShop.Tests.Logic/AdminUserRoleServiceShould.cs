@@ -80,7 +80,7 @@ namespace GlownyShop.Tests.Logic
             //Then
             ArgumentException ex = await Assert.ThrowsAsync<ArgumentException>(
                 () => adminUserRoleService.AddAdminUser(newAdminUser));
-            Assert.Contains("already exist", ex.Message);
+            Assert.Contains("already used", ex.Message);
             Assert.Equal("email", ex.ParamName);
 
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
@@ -105,13 +105,113 @@ namespace GlownyShop.Tests.Logic
             //Then
             ArgumentException ex = await Assert.ThrowsAsync<ArgumentException>(
                 () => adminUserRoleService.AddAdminUser(newAdminUser));
-            Assert.Contains("already exist", ex.Message);
+            Assert.Contains("already used", ex.Message);
             Assert.Equal("email", ex.ParamName);
 
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
                 var admnUser = await db.AdminUsers.FindAsync(100);
                 Assert.Null(admnUser);
+            }
+        }
+
+        [Fact]
+        [Trait("test", "unit")]
+        public async void SuccesUpdateUserPasswordChanged()
+        {
+            // When
+            var newAdminUser = new AdminUser
+            {
+                Id = 0,
+                Email = "super-admin@glowny-shop.com"
+            };
+            var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
+            var adminUser = await adminUserRoleService.UpdateAdminUser(newAdminUser);
+
+            // Then
+            Assert.NotNull(adminUser);
+            using (var db = new GlownyShopContext(_options, _dbLogger.Object))
+            {
+                var admnUser = await db.AdminUsers.FindAsync(0);
+                Assert.NotNull(admnUser);
+                Assert.Equal("super-admin@glowny-shop.com", admnUser.Email);
+                Assert.Equal(0, admnUser.Id);
+            }
+        }
+
+        [Fact]
+        [Trait("test", "unit")]
+        public async void SuccesUpdateUserPasswordUnchanged()
+        {
+            // When
+            var newAdminUser = new AdminUser
+            {
+                Id = 0,
+                Email = "superadmin@glowny-shop.com"
+            };
+            var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
+            var adminUser = await adminUserRoleService.UpdateAdminUser(newAdminUser);
+
+            // Then
+            Assert.NotNull(adminUser);
+            using (var db = new GlownyShopContext(_options, _dbLogger.Object))
+            {
+                var admnUser = await db.AdminUsers.FindAsync(0);
+                Assert.NotNull(admnUser);
+                Assert.Equal("super-admin@glowny-shop.com", admnUser.Email);
+                Assert.Equal(0, admnUser.Id);
+            }
+        }
+
+        [Fact]
+        [Trait("test", "unit")]
+        public async void FailedUpdateNewUserDuplicateEmail()
+        {
+            // When
+            var newAdminUser = new AdminUser
+            {
+                Id = 0,
+                Email = "useradmin@glowny-shop.com"
+            };
+            var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
+            //Then
+            ArgumentException ex = await Assert.ThrowsAsync<ArgumentException>(
+                () => adminUserRoleService.UpdateAdminUser(newAdminUser));
+            Assert.Contains("already used", ex.Message);
+            Assert.Equal("email", ex.ParamName);
+
+            using (var db = new GlownyShopContext(_options, _dbLogger.Object))
+            {
+                var admnUser = await db.AdminUsers.FindAsync(0);
+                Assert.NotNull(admnUser);
+                Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
+                Assert.Equal(0, admnUser.Id);
+            }
+        }
+
+        [Fact]
+        [Trait("test", "unit")]
+        public async void FailedUpdateNewUserDuplicateEmailCase()
+        {
+            // When
+            var newAdminUser = new AdminUser
+            {
+                Id = 0,
+                Email = "UserAdmin@glowny-shop.com"
+            };
+            var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
+            //Then
+            ArgumentException ex = await Assert.ThrowsAsync<ArgumentException>(
+                () => adminUserRoleService.UpdateAdminUser(newAdminUser));
+            Assert.Contains("already used", ex.Message);
+            Assert.Equal("email", ex.ParamName);
+
+            using (var db = new GlownyShopContext(_options, _dbLogger.Object))
+            {
+                var admnUser = await db.AdminUsers.FindAsync(0);
+                Assert.NotNull(admnUser);
+                Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
+                Assert.Equal(0, admnUser.Id);
             }
         }
     }
