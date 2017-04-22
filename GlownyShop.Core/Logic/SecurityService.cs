@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GlownyShop.Core.Data;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,6 +8,13 @@ namespace GlownyShop.Core.Logic
 {
     public class SecurityService : ISecurityService
     {
+        private readonly IAdminUserRepository _adminUserRepository;
+
+        public SecurityService(IAdminUserRepository adminUserRepository)
+        {
+            _adminUserRepository = adminUserRepository;
+        }
+
         private static string GetSalt()
         {
             byte[] bytes = new byte[128 / 8];
@@ -115,7 +123,12 @@ namespace GlownyShop.Core.Logic
 
         public bool ValidateAdminUser(string email, string password)
         {
-            throw new NotImplementedException();
+            var adminUser = _adminUserRepository.GetByEmail(email).Result;
+
+            if (adminUser == null)
+                return false;
+
+            return CompareHashedPassword(password, adminUser.Password);
         }
     }
 }
