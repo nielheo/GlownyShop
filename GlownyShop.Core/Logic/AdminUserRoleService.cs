@@ -50,6 +50,8 @@ namespace GlownyShop.Core.Logic
             dbAdminUser = _adminUserRepository.Get(adminUser.Id).Result;
             dbAdminUser.Email = adminUser.Email;
             dbAdminUser.FirstName = adminUser.FirstName;
+            dbAdminUser.LastName = adminUser.LastName;
+            dbAdminUser.IsActive = adminUser.IsActive;
             
             var saved = _adminUserRepository.SaveChangesAsync().Result;
 

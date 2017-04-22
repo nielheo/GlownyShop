@@ -98,7 +98,8 @@ namespace GlownyShop.Tests.Logic
             var newAdminUser = new AdminUser
             {
                 Id = 101,
-                Email = "SuperAdmin@glowny-shop.com"
+                Email = "SuperAdmin@glowny-shop.com",
+
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
 
@@ -123,7 +124,11 @@ namespace GlownyShop.Tests.Logic
             var newAdminUser = new AdminUser
             {
                 Id = 1,
-                Email = "super-admin@glowny-shop.com"
+                Email = "super-admin@glowny-shop.com",
+                FirstName = "First 1",
+                LastName = "Last 1",
+                IsActive = false,
+                Password = "0000"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
             var adminUser = await adminUserRoleService.UpdateAdminUser(newAdminUser);
@@ -136,9 +141,19 @@ namespace GlownyShop.Tests.Logic
                 Assert.NotNull(admnUser);
                 Assert.Equal("super-admin@glowny-shop.com", admnUser.Email);
                 Assert.Equal(1, admnUser.Id);
+                Assert.Equal("First 1", admnUser.FirstName);
+                Assert.Equal("Last 1", admnUser.LastName);
+                Assert.Equal(false, admnUser.IsActive);
+                Assert.NotEqual("0000", admnUser.Password);
+
 
                 //clean up
                 admnUser.Email = "superadmin@glowny-shop.com";
+                admnUser.FirstName = "Super";
+                admnUser.LastName = "Admin";
+                admnUser.Password = SecurityService.GenerateHashedPassword("P@ssw0rd");
+                admnUser.IsActive = true;
+
                 db.SaveChanges();
             }
         }
@@ -152,7 +167,10 @@ namespace GlownyShop.Tests.Logic
             {
                 Id = 1,
                 Email = "superadmin@glowny-shop.com",
-                FirstName = "First 1"
+                FirstName = "First 1",
+                LastName = "Last 1",
+                IsActive = false,
+                Password = "0000"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
             var adminUser = await adminUserRoleService.UpdateAdminUser(newAdminUser);
@@ -165,9 +183,17 @@ namespace GlownyShop.Tests.Logic
                 Assert.NotNull(admnUser);
                 Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
                 Assert.Equal(1, admnUser.Id);
+                Assert.Equal("First 1", admnUser.FirstName);
+                Assert.Equal("Last 1", admnUser.LastName);
+                Assert.Equal(false, admnUser.IsActive);
+                Assert.NotEqual("0000", admnUser.Password);
 
                 //clean up
                 admnUser.Email = "superadmin@glowny-shop.com";
+                admnUser.FirstName = "Super";
+                admnUser.LastName = "Admin";
+                admnUser.Password = SecurityService.GenerateHashedPassword("P@ssw0rd");
+                admnUser.IsActive = true;
                 db.SaveChanges();
             }
         }
