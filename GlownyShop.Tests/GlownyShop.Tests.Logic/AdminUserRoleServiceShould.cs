@@ -122,7 +122,7 @@ namespace GlownyShop.Tests.Logic
             // When
             var newAdminUser = new AdminUser
             {
-                Id = 0,
+                Id = 1,
                 Email = "super-admin@glowny-shop.com"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
@@ -132,10 +132,14 @@ namespace GlownyShop.Tests.Logic
             Assert.NotNull(adminUser);
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(0);
+                var admnUser = await db.AdminUsers.FindAsync(1);
                 Assert.NotNull(admnUser);
                 Assert.Equal("super-admin@glowny-shop.com", admnUser.Email);
-                Assert.Equal(0, admnUser.Id);
+                Assert.Equal(1, admnUser.Id);
+
+                //clean up
+                admnUser.Email = "superadmin@glowny-shop.com";
+                db.SaveChanges();
             }
         }
 
@@ -146,8 +150,9 @@ namespace GlownyShop.Tests.Logic
             // When
             var newAdminUser = new AdminUser
             {
-                Id = 0,
-                Email = "superadmin@glowny-shop.com"
+                Id = 1,
+                Email = "superadmin@glowny-shop.com",
+                FirstName = "First 1"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
             var adminUser = await adminUserRoleService.UpdateAdminUser(newAdminUser);
@@ -156,10 +161,14 @@ namespace GlownyShop.Tests.Logic
             Assert.NotNull(adminUser);
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(0);
+                var admnUser = await db.AdminUsers.FindAsync(1);
                 Assert.NotNull(admnUser);
-                Assert.Equal("super-admin@glowny-shop.com", admnUser.Email);
-                Assert.Equal(0, admnUser.Id);
+                Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
+                Assert.Equal(1, admnUser.Id);
+
+                //clean up
+                admnUser.Email = "superadmin@glowny-shop.com";
+                db.SaveChanges();
             }
         }
 
@@ -170,7 +179,7 @@ namespace GlownyShop.Tests.Logic
             // When
             var newAdminUser = new AdminUser
             {
-                Id = 0,
+                Id = 1,
                 Email = "useradmin@glowny-shop.com"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
@@ -182,10 +191,10 @@ namespace GlownyShop.Tests.Logic
 
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(0);
+                var admnUser = await db.AdminUsers.FindAsync(1);
                 Assert.NotNull(admnUser);
                 Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
-                Assert.Equal(0, admnUser.Id);
+                Assert.Equal(1, admnUser.Id);
             }
         }
 
@@ -196,7 +205,7 @@ namespace GlownyShop.Tests.Logic
             // When
             var newAdminUser = new AdminUser
             {
-                Id = 0,
+                Id = 1,
                 Email = "UserAdmin@glowny-shop.com"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
@@ -208,10 +217,10 @@ namespace GlownyShop.Tests.Logic
 
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(0);
+                var admnUser = await db.AdminUsers.FindAsync(1);
                 Assert.NotNull(admnUser);
                 Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
-                Assert.Equal(0, admnUser.Id);
+                Assert.Equal(1, admnUser.Id);
             }
         }
     }

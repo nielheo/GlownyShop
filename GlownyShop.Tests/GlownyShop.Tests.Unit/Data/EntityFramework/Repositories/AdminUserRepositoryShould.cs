@@ -34,23 +34,23 @@ namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
             _adminUserRepository = new AdminUserRepository(glownyShopContext, repoLogger.Object);
         }
 
-        //[Fact]
-        //[Trait("test", "unit")]
-        //public async void Return3RowsGivenGetAll()
-        //{
-        //    // When
-        //    var glownyShopContext = new GlownyShopContext(_options, _dbLogger.Object);
-        //    var repoLogger = new Mock<ILogger<AdminRoleRepository>>();
-        //    var _adminRoleRepositoryAll = new AdminRoleRepository(glownyShopContext, repoLogger.Object);
-        //    var adminRoles = await _adminRoleRepositoryAll.GetAll();
+        [Fact]
+        [Trait("test", "unit")]
+        public async void Return4RowsGivenGetAll()
+        {
+            // When
+            var glownyShopContext = new GlownyShopContext(_options, _dbLogger.Object);
+            var repoLogger = new Mock<ILogger<AdminUserRepository>>();
+            var _adminUserRepositoryAll = new AdminUserRepository(glownyShopContext, repoLogger.Object);
+            var adminUsers = await _adminUserRepositoryAll.GetAll();
 
-        //    // Then
-        //    Assert.NotNull(adminRoles);
-        //    Assert.Equal(3, adminRoles.Count);
+            // Then
+            Assert.NotNull(adminUsers);
+            Assert.Equal(4, adminUsers.Count);
 
-        //    //CleanUp
-        //    var saved = await _adminRoleRepositoryAll.SaveChangesAsync();
-        //}
+            //CleanUp
+            var saved = await _adminUserRepositoryAll.SaveChangesAsync();
+        }
 
         //[Fact]
         //[Trait("test", "unit")]

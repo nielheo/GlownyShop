@@ -24,10 +24,10 @@ namespace GlownyShop.Core.Logic
             var adminUserExist = _adminUserRepository.GetByEmail(adminUser.Email).Result;
 
             if (adminUserExist != null)
-                throw new ArgumentException(string.Format("User with Email {0} already exist", adminUser.Email), "email");
+                throw new ArgumentException(string.Format("User with Email {0} already used", adminUser.Email), "email");
 
             _adminUserRepository.Add(adminUser);
-            var saved = _adminRoleRepository.SaveChangesAsync().Result;
+            var saved = _adminUserRepository.SaveChangesAsync().Result;
 
             if (!saved)
                 return null;
@@ -37,6 +37,25 @@ namespace GlownyShop.Core.Logic
 
         public Task<AdminUser> UpdateAdminUser(AdminUser adminUser)
         {
+            var dbAdminUser = _adminUserRepository.Get(adminUser.Id).Result;
+
+            if (dbAdminUser == null)
+                throw new Exception(string.Format("User with id: {0}, not found", adminUser.Id));
+
+            var adminUserExist = _adminUserRepository.GetByEmail(adminUser.Email).Result;
+
+            if (adminUserExist != null && adminUserExist.Id != adminUser.Id)
+                throw new ArgumentException(string.Format("User with Email {0} already used", adminUser.Email), "email");
+
+            dbAdminUser = _adminUserRepository.Get(adminUser.Id).Result;
+            dbAdminUser.Email = adminUser.Email;
+            dbAdminUser.FirstName = adminUser.FirstName;
+            
+            var saved = _adminUserRepository.SaveChangesAsync().Result;
+
+            if (!saved)
+                return null;
+
             return _adminUserRepository.Get(adminUser.Id);
         }
     }
