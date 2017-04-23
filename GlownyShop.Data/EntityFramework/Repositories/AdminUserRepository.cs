@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GlownyShop.Data.EntityFramework.Repositories
 {
-    public class AdminUserRepository : BaseRepository<AdminUser, int>, IAdminUserRepository
+    public class AdminUserRepository : BaseRepository<AdminUser, string>, IAdminUserRepository
     {
         public AdminUserRepository()
         {

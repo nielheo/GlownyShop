@@ -6,6 +6,7 @@ using GlownyShop.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -81,9 +82,10 @@ namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
         public async void AddNewAdminUser()
         {
             // Given
+            string newGuid = Guid.NewGuid().ToString();
             var newAdminUser = new AdminUser
             {
-                Id = 10,
+                Id = newGuid,
                 FirstName = "First",
                 LastName = "Last",
                 Email = "first@last.com",
@@ -100,9 +102,9 @@ namespace GlownyShop.Tests.Unit.Data.EntityFramework.Repositories
             //var id = newAdminUser.Id;
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var adminUser = await db.AdminUsers.FindAsync(10);
+                var adminUser = await db.AdminUsers.FindAsync(newGuid);
                 Assert.NotNull(adminUser);
-                Assert.Equal(10, adminUser.Id);
+                Assert.Equal(newGuid, adminUser.Id);
                 Assert.Equal("First", adminUser.FirstName);
                 Assert.Equal("Last", adminUser.LastName);
                 Assert.Equal("first@last.com", adminUser.Email);

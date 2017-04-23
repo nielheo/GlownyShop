@@ -1,13 +1,13 @@
-﻿using GlownyShop.Data.EntityFramework;
+﻿using GlownyShop.Core.Logic;
+using GlownyShop.Data.EntityFramework;
 using GlownyShop.Data.EntityFramework.Repositories;
 using GlownyShop.Data.EntityFramework.Seed;
 using GlownyShop.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Xunit;
-using GlownyShop.Core.Logic;
 using System;
+using Xunit;
 
 namespace GlownyShop.Tests.Logic
 {
@@ -42,8 +42,10 @@ namespace GlownyShop.Tests.Logic
         public async void SuccesAddNewUser()
         {
             // When
+            string newId = Guid.NewGuid().ToString();
             var newAdminUser = new AdminUser
             {
+                Id = newId,
                 Email = "new-email@glowny-shop.com"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
@@ -53,7 +55,7 @@ namespace GlownyShop.Tests.Logic
             Assert.NotNull(adminUser);
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FirstOrDefaultAsync(a => 
+                var admnUser = await db.AdminUsers.FirstOrDefaultAsync(a =>
                     a.Email == "new-email@glowny-shop.com");
                 Assert.NotNull(admnUser);
                 Assert.Equal("new-email@glowny-shop.com", admnUser.Email);
@@ -70,9 +72,10 @@ namespace GlownyShop.Tests.Logic
         public async void FailedAddNewUserGivenDuplicateEmail()
         {
             // When
+            string newGuid = Guid.NewGuid().ToString();
             var newAdminUser = new AdminUser
             {
-                Id = 100,
+                Id = newGuid,
                 Email = "superadmin@glowny-shop.com"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
@@ -85,7 +88,7 @@ namespace GlownyShop.Tests.Logic
 
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(100);
+                var admnUser = await db.AdminUsers.FindAsync(newGuid);
                 Assert.Null(admnUser);
             }
         }
@@ -95,11 +98,11 @@ namespace GlownyShop.Tests.Logic
         public async void FailedAddNewUserGivenDuplicateEmailWithCase()
         {
             // When
+            string newGuid = Guid.NewGuid().ToString();
             var newAdminUser = new AdminUser
             {
-                Id = 101,
+                Id = newGuid,
                 Email = "SuperAdmin@glowny-shop.com",
-
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
 
@@ -111,7 +114,7 @@ namespace GlownyShop.Tests.Logic
 
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(100);
+                var admnUser = await db.AdminUsers.FindAsync(newGuid);
                 Assert.Null(admnUser);
             }
         }
@@ -123,7 +126,7 @@ namespace GlownyShop.Tests.Logic
             // When
             var newAdminUser = new AdminUser
             {
-                Id = 1,
+                Id = new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(),
                 Email = "super-admin@glowny-shop.com",
                 FirstName = "First 1",
                 LastName = "Last 1",
@@ -137,15 +140,14 @@ namespace GlownyShop.Tests.Logic
             Assert.NotNull(adminUser);
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(1);
+                var admnUser = await db.AdminUsers.FindAsync(new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString());
                 Assert.NotNull(admnUser);
                 Assert.Equal("super-admin@glowny-shop.com", admnUser.Email);
-                Assert.Equal(1, admnUser.Id);
+                Assert.Equal(new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(), admnUser.Id);
                 Assert.Equal("First 1", admnUser.FirstName);
                 Assert.Equal("Last 1", admnUser.LastName);
                 Assert.Equal(false, admnUser.IsActive);
                 Assert.NotEqual("0000", admnUser.Password);
-
 
                 //clean up
                 admnUser.Email = "superadmin@glowny-shop.com";
@@ -165,7 +167,7 @@ namespace GlownyShop.Tests.Logic
             // When
             var newAdminUser = new AdminUser
             {
-                Id = 1,
+                Id = new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(),
                 Email = "superadmin@glowny-shop.com",
                 FirstName = "First 1",
                 LastName = "Last 1",
@@ -179,10 +181,10 @@ namespace GlownyShop.Tests.Logic
             Assert.NotNull(adminUser);
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(1);
+                var admnUser = await db.AdminUsers.FindAsync(new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString());
                 Assert.NotNull(admnUser);
                 Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
-                Assert.Equal(1, admnUser.Id);
+                Assert.Equal(new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(), admnUser.Id);
                 Assert.Equal("First 1", admnUser.FirstName);
                 Assert.Equal("Last 1", admnUser.LastName);
                 Assert.Equal(false, admnUser.IsActive);
@@ -200,12 +202,12 @@ namespace GlownyShop.Tests.Logic
 
         [Fact]
         [Trait("test", "unit")]
-        public async void FailedUpdateNewUserDuplicateEmail()
+        public async void FailedUpdateUserDuplicateEmail()
         {
             // When
             var newAdminUser = new AdminUser
             {
-                Id = 1,
+                Id = new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(),
                 Email = "useradmin@glowny-shop.com"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
@@ -217,10 +219,10 @@ namespace GlownyShop.Tests.Logic
 
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(1);
+                var admnUser = await db.AdminUsers.FindAsync(new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString());
                 Assert.NotNull(admnUser);
                 Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
-                Assert.Equal(1, admnUser.Id);
+                Assert.Equal(new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(), admnUser.Id);
             }
         }
 
@@ -231,7 +233,7 @@ namespace GlownyShop.Tests.Logic
             // When
             var newAdminUser = new AdminUser
             {
-                Id = 1,
+                Id = new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(),
                 Email = "UserAdmin@glowny-shop.com"
             };
             var adminUserRoleService = new AdminUserRoleService(_adminUserRepository, _adminRoleRepository);
@@ -243,10 +245,10 @@ namespace GlownyShop.Tests.Logic
 
             using (var db = new GlownyShopContext(_options, _dbLogger.Object))
             {
-                var admnUser = await db.AdminUsers.FindAsync(1);
+                var admnUser = await db.AdminUsers.FindAsync(new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString());
                 Assert.NotNull(admnUser);
                 Assert.Equal("superadmin@glowny-shop.com", admnUser.Email);
-                Assert.Equal(1, admnUser.Id);
+                Assert.Equal(new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(), admnUser.Id);
             }
         }
     }

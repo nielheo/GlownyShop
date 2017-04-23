@@ -20,43 +20,48 @@ namespace GlownyShop.Tests.Trying
 
         static void Main(string[] args)
         {
-            using (var sha256 = SHA256.Create())
+            //using (var sha256 = SHA256.Create())
+            //{
+            //    // Send a sample text to hash.
+            //    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes("hello world"));
+
+            //    // Get the hashed string.
+            //    var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+            //    // Print the string. 
+            //    Console.WriteLine(hash);
+
+            //}
+
+            //string a = "12345678";
+            //string a1 = SecurityService.GenerateHashedPassword(a);
+            //Console.WriteLine(string.Format("{0}|{1}", a, a1));
+            //Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
+
+            //a = "12345678";
+            //a1 = SecurityService.GenerateHashedPassword(a);
+            //Console.WriteLine(string.Format("{0}|{1}", a, a1));
+            //Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
+
+            //a = "1234sdfsdsdfsdf5678";
+            //a1 = SecurityService.GenerateHashedPassword(a);
+            //Console.WriteLine(string.Format("{0}|{1}", a, a1));
+            //Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
+
+            //a = "123434SDSA5678";
+            //a1 = SecurityService.GenerateHashedPassword(a);
+            //Console.WriteLine(string.Format("{0}|{1}", a, a1));
+            //Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
+
+            //a = "2%^532gjasdhjgsa12343A_sd&@*$#(XNSJD_+5678";
+            //a1 = SecurityService.GenerateHashedPassword(a);
+            //Console.WriteLine(string.Format("{0}|{1}", a, a1));
+            //Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
+
+            for (int i = 0; i < 4; i++)
             {
-                // Send a sample text to hash.
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes("hello world"));
-
-                // Get the hashed string.
-                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-
-                // Print the string. 
-                Console.WriteLine(hash);
-                
+                Console.WriteLine(Guid.NewGuid().ToString());
             }
-
-            string a = "12345678";
-            string a1 = SecurityService.GenerateHashedPassword(a);
-            Console.WriteLine(string.Format("{0}|{1}", a, a1));
-            Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
-
-            a = "12345678";
-            a1 = SecurityService.GenerateHashedPassword(a);
-            Console.WriteLine(string.Format("{0}|{1}", a, a1));
-            Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
-
-            a = "1234sdfsdsdfsdf5678";
-            a1 = SecurityService.GenerateHashedPassword(a);
-            Console.WriteLine(string.Format("{0}|{1}", a, a1));
-            Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
-
-            a = "123434SDSA5678";
-            a1 = SecurityService.GenerateHashedPassword(a);
-            Console.WriteLine(string.Format("{0}|{1}", a, a1));
-            Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
-
-            a = "2%^532gjasdhjgsa12343A_sd&@*$#(XNSJD_+5678";
-            a1 = SecurityService.GenerateHashedPassword(a);
-            Console.WriteLine(string.Format("{0}|{1}", a, a1));
-            Console.WriteLine(SecurityService.CompareHashedPassword(a, a1));
 
             Console.Read();
         }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GlownyShop.Data.Migrations
 {
@@ -22,12 +24,12 @@ namespace GlownyShop.Data.Migrations
                 name: "AdminUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                    Id = table.Column<string>(nullable: false),
                     Email = table.Column<string>(maxLength: 200, nullable: false),
                     FirstName = table.Column<string>(maxLength: 200, nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    LastName = table.Column<string>(maxLength: 200, nullable: false)
+                    LastName = table.Column<string>(maxLength: 200, nullable: false),
+                    Password = table.Column<string>(maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +40,7 @@ namespace GlownyShop.Data.Migrations
                 name: "AdminUserRoles",
                 columns: table => new
                 {
-                    AdminUserId = table.Column<int>(nullable: false),
+                    AdminUserId = table.Column<string>(nullable: false),
                     AdminRoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -57,6 +59,12 @@ namespace GlownyShop.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AdminUsers_Email",
+                table: "AdminUsers",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AdminUserRoles_AdminRoleId",

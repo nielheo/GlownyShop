@@ -45,7 +45,7 @@ namespace GlownyShop.Data.EntityFramework
 
             // adminUsers
             modelBuilder.Entity<AdminUser>().HasKey(c => c.Id);
-            modelBuilder.Entity<AdminUser>().Property(e => e.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<AdminUser>().Property(e => e.Id).ValueGeneratedNever();
             modelBuilder.Entity<AdminUser>()
                 .HasIndex(p => new { p.Email })
                 .IsUnique();

@@ -8,8 +8,8 @@ using GlownyShop.Data.EntityFramework;
 namespace GlownyShop.Data.Migrations
 {
     [DbContext(typeof(GlownyShopContext))]
-    [Migration("20170422052146_AddPasswordAdminUser")]
-    partial class AddPasswordAdminUser
+    [Migration("20170423085517_initiate")]
+    partial class initiate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,8 +31,7 @@ namespace GlownyShop.Data.Migrations
 
             modelBuilder.Entity("GlownyShop.Models.AdminUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -54,12 +53,15 @@ namespace GlownyShop.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("AdminUsers");
                 });
 
             modelBuilder.Entity("GlownyShop.Models.AdminUserRole", b =>
                 {
-                    b.Property<int>("AdminUserId");
+                    b.Property<string>("AdminUserId");
 
                     b.Property<int>("AdminRoleId");
 

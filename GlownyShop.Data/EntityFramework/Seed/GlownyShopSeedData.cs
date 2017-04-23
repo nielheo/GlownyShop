@@ -1,6 +1,7 @@
 ﻿using GlownyShop.Core.Logic;
 using GlownyShop.Models;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +16,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
             // admin users
             var AdminUserSuperAdmin = new AdminUser
             {
-                //Id = 1,
+                Id = new Guid("1d9a394c-60b8-4523-ab41-52b2936836c3").ToString(),
                 FirstName = "Super",
                 LastName = "Admin",
                 Email = "superadmin@glowny-shop.com",
@@ -25,7 +26,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
 
             var AdminUserUserAdmin = new AdminUser
             {
-                //Id = 2,
+                Id = new Guid("5a736c82-2c9b-4030-abd5-52058549920c").ToString(),
                 FirstName = "User",
                 LastName = "Admin",
                 Email = "useradmin@glowny-shop.com",
@@ -35,7 +36,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
 
             var AdminUserClientAdmin1 = new AdminUser
             {
-                //Id = 3,
+                Id = new Guid("15220f30-c001-47ca-a539-58dab2371b79").ToString(),
                 FirstName = "Client",
                 LastName = "Admin 1",
                 Email = "clientadmin1@glowny-shop.com",
@@ -45,7 +46,7 @@ namespace GlownyShop.Data.EntityFramework.Seed
 
             var AdminUserClientAdmin2 = new AdminUser
             {
-                //Id = 4,
+                Id = new Guid("67a4ac55-f101-411d-90fa-709fcac666b1").ToString(),
                 FirstName = "Client",
                 LastName = "Admin 2",
                 Email = "clientadmin2@glowny-shop.com",

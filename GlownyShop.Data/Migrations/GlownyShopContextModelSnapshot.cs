@@ -30,8 +30,7 @@ namespace GlownyShop.Data.Migrations
 
             modelBuilder.Entity("GlownyShop.Models.AdminUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -61,7 +60,7 @@ namespace GlownyShop.Data.Migrations
 
             modelBuilder.Entity("GlownyShop.Models.AdminUserRole", b =>
                 {
-                    b.Property<int>("AdminUserId");
+                    b.Property<string>("AdminUserId");
 
                     b.Property<int>("AdminRoleId");
 

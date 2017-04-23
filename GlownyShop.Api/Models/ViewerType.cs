@@ -1,6 +1,7 @@
 ﻿using GlownyShop.Models;
 using GraphQL;
 using GraphQL.Types;
+using System;
 using System.Collections.Generic;
 
 namespace GlownyShop.Api.Models
@@ -49,11 +50,11 @@ namespace GlownyShop.Api.Models
                 {
                     var userContext = context.UserContext.As<GraphQLUserContext>();
 
-                    var id = context.GetArgument<int?>("id");
+                    var id = context.GetArgument<string>("id");
                     if (id != null)
                     {
                         IList<AdminUser> adminUsers = new List<AdminUser>();
-                        var adminUser = adminUserRepository.Get(id.Value).Result;
+                        var adminUser = adminUserRepository.Get(id).Result;
                         if (adminUser != null)
                             adminUsers.Add(adminUser);
 
