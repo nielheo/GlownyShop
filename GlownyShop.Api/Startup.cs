@@ -67,6 +67,14 @@ namespace GlownyShop.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = "http://localhost:51000",
+                RequireHttpsMetadata = false,
+
+                ApiName = "api1"
+            });
+
             app.UseStaticFiles();
             app.UseMvc();
 

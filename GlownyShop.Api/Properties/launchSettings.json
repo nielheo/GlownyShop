@@ -18,11 +18,11 @@
     },
     "GlownyShop.Api": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "http://localhost:5555/graphql",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:5555/"
     }
   }
 }
