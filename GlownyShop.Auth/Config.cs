@@ -56,13 +56,13 @@ namespace GlownyShop.Auth
             {
                 new TestUser
                 {
-                    SubjectId = "1",
+                    SubjectId = "SubjectId_1",
                     Username = "alice",
                     Password = "password"
                 },
                 new TestUser
                 {
-                    SubjectId = "2",
+                    SubjectId = "SubjectId_2",
                     Username = "bob",
                     Password = "password"
                 }
