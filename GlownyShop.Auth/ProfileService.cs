@@ -1,6 +1,7 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -12,12 +13,13 @@ namespace GlownyShop.Auth
 
         public Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
-            //if (context.RequestedClaimTypes.Any())
-            //{
-            context.IssuedClaims.Add(new Claim("role", "superAdmin"));
-            context.IssuedClaims.Add(new Claim("role", "clientAdmin"));
-            context.IssuedClaims.Add(new Claim("role", "userAdmin"));
-            //}
+            
+            if (context.RequestedClaimTypes.Any())
+            {
+                context.IssuedClaims.Add(new Claim("role", "superAdmin"));
+                context.IssuedClaims.Add(new Claim("role", "clientAdmin"));
+                context.IssuedClaims.Add(new Claim("role", "userAdmin"));
+            }
 
             return Task.FromResult(0);
         }

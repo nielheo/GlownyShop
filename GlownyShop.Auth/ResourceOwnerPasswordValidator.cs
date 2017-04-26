@@ -23,15 +23,20 @@ namespace GlownyShop.Auth
 
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
-            if (_SecurityService.ValidateAdminUser(context.UserName, context.Password))
+            var adminUser = _SecurityService.ValidateAdminUser(context.UserName, context.Password);
+            if (adminUser != null)
             {
-                var adminUser = _AdminUserRepository.GetAll().Result.FirstOrDefault();
                 ICollection<Claim> claims = new HashSet<Claim>(new ClaimComparer());
 
                 claims.Add(new Claim("email", adminUser.Email));
                 claims.Add(new Claim("firstName", adminUser.FirstName));
                 claims.Add(new Claim("lastName", adminUser.LastName));
-                
+
+                adminUser = _AdminUserRepository.Get(adminUser.Id, "AdminUserRoles.AdminUser").Result;
+
+                if (adminUser.AdminUserRoles.Where(u => u.AdminRoleId == 0).Count() > 0)
+                    claims.Add(new Claim("role", "SuperAdmin"));
+
                 context.Result = new GrantValidationResult(adminUser.Id,
                     OidcConstants.AuthenticationMethods.Password, claims);
                 

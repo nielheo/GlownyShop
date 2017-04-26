@@ -1,7 +1,9 @@
-﻿namespace GlownyShop.Core.Logic
+﻿using GlownyShop.Models;
+
+namespace GlownyShop.Core.Logic
 {
     public interface ISecurityService
     {
-        bool ValidateAdminUser(string email, string password);
+        AdminUser ValidateAdminUser(string email, string password);
     }
 }

@@ -130,7 +130,7 @@ namespace GlownyShop.Tests.Logic
             string password = "P@ssw0rd";
 
             var result = _securityService.ValidateAdminUser(email, password);
-            Assert.Equal(true, result);
+            Assert.NotNull(result);
         }
 
         [Fact]
@@ -142,7 +142,7 @@ namespace GlownyShop.Tests.Logic
             string password = "P@ssw0rd";
 
             var result = _securityService.ValidateAdminUser(email, password);
-            Assert.Equal(true, result);
+            Assert.NotNull(result);
         }
 
         [Fact]
@@ -154,7 +154,7 @@ namespace GlownyShop.Tests.Logic
             string password = "P@ssw0rd";
 
             var result = _securityService.ValidateAdminUser(email, password);
-            Assert.Equal(false, result);
+            Assert.Null(result);
         }
 
 
@@ -167,7 +167,7 @@ namespace GlownyShop.Tests.Logic
             string password = "P@ssw0rd1";
 
             var result = _securityService.ValidateAdminUser(email, password);
-            Assert.Equal(false, result);
+            Assert.Null(result);
         }
 
         [Fact]
@@ -179,7 +179,7 @@ namespace GlownyShop.Tests.Logic
             string password = "P@ssw0rD";
 
             var result = _securityService.ValidateAdminUser(email, password);
-            Assert.Equal(false, result);
+            Assert.Null(result);
         }
     }
 }

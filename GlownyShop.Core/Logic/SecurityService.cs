@@ -1,4 +1,5 @@
 ﻿using GlownyShop.Core.Data;
+using GlownyShop.Models;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
@@ -121,14 +122,20 @@ namespace GlownyShop.Core.Logic
             }
         }
 
-        public bool ValidateAdminUser(string email, string password)
+        public AdminUser ValidateAdminUser(string email, string password)
         {
             var adminUser = _adminUserRepository.GetByEmail(email).Result;
 
             if (adminUser == null)
-                return false;
+                return null;
 
-            return CompareHashedPassword(password, adminUser.Password);
+            //adminUser = _adminUserRepository.Get(adminUser.Id, "AdminUserRoles.AdminUser").Result;
+
+            if (CompareHashedPassword(password, adminUser.Password))
+                return adminUser;
+            else
+                return null;
+                   
         }
     }
 }
