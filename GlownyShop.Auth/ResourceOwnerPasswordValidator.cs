@@ -32,10 +32,10 @@ namespace GlownyShop.Auth
                 claims.Add(new Claim("firstName", adminUser.FirstName));
                 claims.Add(new Claim("lastName", adminUser.LastName));
 
-                adminUser = _AdminUserRepository.Get(adminUser.Id, "AdminUserRoles.AdminUser").Result;
+                //adminUser = _AdminUserRepository.Get(adminUser.Id, "AdminUserRoles.AdminUser").Result;
 
-                if (adminUser.AdminUserRoles.Where(u => u.AdminRoleId == 0).Count() > 0)
-                    claims.Add(new Claim("role", "SuperAdmin"));
+                //if (adminUser.AdminUserRoles.Where(u => u.AdminRoleId == 0).Count() > 0)
+                //    claims.Add(new Claim("role", "SuperAdmin"));
 
                 context.Result = new GrantValidationResult(adminUser.Id,
                     OidcConstants.AuthenticationMethods.Password, claims);
