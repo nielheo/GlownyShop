@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {grey900, cyan500} from 'material-ui/styles/colors'
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -15,6 +16,9 @@ const styles = {
   drawer: {
     backgroundColor: '#FFD600',
   },
+  AppBar: {
+    backgroundColor: cyan500,
+  }
 };
 
 export default class LayoutPage extends React.Component {
@@ -37,7 +41,7 @@ export default class LayoutPage extends React.Component {
           containerStyle={styles.drawer}
           onRequestChange={(open) => this.setState({open})}
         >
-          <AppBar iconElementLeft={<span></span>} title='Thrive People' />
+          <AppBar iconElementLeft={<span></span>} title='Thrive People' style={styles.AppBar} />
           <Menu>
             <MenuItem href='/' primaryText='Home' />
             <MenuItem href='/aboutus' primaryText='About Us' />
