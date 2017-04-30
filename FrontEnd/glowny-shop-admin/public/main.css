@@ -1,6 +1,6 @@
 html {
   font-family: 'Roboto', sans-serif;
-  background-color: #FFD600;
+  background-color: #FFF;
 }
 
 body {
@@ -8,4 +8,5 @@ body {
   line-height: 20px;
   margin: 0;
   padding: 0;
+  color: #000;
 }

@@ -5,7 +5,7 @@ export default class AboutUs extends React.Component {
   render() {
     return (
       <div>
-        About Us
+        AboutUs
       </div>
     );
   }
