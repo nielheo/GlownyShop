@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 using IdentityServer4.Test;
 using System.Collections.Generic;
 
@@ -46,6 +47,32 @@ namespace GlownyShop.Auth
                         new Secret("secret".Sha256())
                     },
                     AllowedScopes = { "api1" }
+                },
+
+                new Client
+                {
+                    ClientId = "js",
+                    ClientName = "JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    //AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    //AllowedGrantTypes = GrantTypes.Implicit,
+                    //AllowAccessTokensViaBrowser = true,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    RedirectUris =           { "http://localhost:3000/login" },
+                    //PostLogoutRedirectUris = { "http://localhost:3000/index.html" },
+                    AllowedCorsOrigins =     { "http://localhost:3000" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    }
                 }
             };
         }

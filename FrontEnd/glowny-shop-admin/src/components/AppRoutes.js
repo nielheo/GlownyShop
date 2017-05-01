@@ -7,7 +7,7 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom'
-import {grey900, cyan500} from 'material-ui/styles/colors'
+import {grey900, cyan500, grey700} from 'material-ui/styles/colors'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { getUserToken } from '../components/Common/Cookies'
@@ -23,6 +23,8 @@ const muiTheme = getMuiTheme({
   palette: {
     textColor: grey900,
     primary1Color: grey900,
+    primary2Color: grey700,
+    primary3Color: grey700,
     accent1Color: cyan500,
   },
 })
