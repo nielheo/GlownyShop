@@ -1,5 +1,6 @@
 ﻿using GlownyShop.Api.Models;
 using GlownyShop.Core.Data;
+using GlownyShop.Core.Logic;
 using GlownyShop.Data.EntityFramework;
 using GlownyShop.Data.EntityFramework.Repositories;
 using GlownyShop.Data.EntityFramework.Seed;
@@ -40,17 +41,49 @@ namespace GlownyShop.Api
             services.AddScoped<GlownyShopQuery>();
             services.AddTransient<IAdminRoleRepository, AdminRoleRepository>();
             services.AddTransient<IAdminUserRepository, AdminUserRepository>();
+            services.AddTransient<ISecurityService, SecurityService>();
 
             if (Env.IsEnvironment("Test"))
             {
                 services.AddDbContext<GlownyShopContext>(options =>
-                    options.UseInMemoryDatabase(databaseName: "GlownyShop"));
+                {
+                    options.UseInMemoryDatabase(databaseName: "GlownyShop");
+                });
             }
             else
             {
                 services.AddDbContext<GlownyShopContext>(options =>
-                    options.UseMySQL(Configuration["ConnectionStrings:GlownyShopDatabaseConnection"]));
+                {
+                    options.UseMySQL(Configuration["ConnectionStrings:GlownyShopDatabaseConnection"]);
+                });
             }
+
+            services.AddDbContext<DbContext>(options =>
+            {
+                // Configure the context to use an in-memory store.
+                options.UseInMemoryDatabase();
+                // Register the entity sets needed by OpenIddict.
+                // Note: use the generic overload if you need
+                // to replace the default OpenIddict entities.
+                options.UseOpenIddict();
+            });
+
+            services.AddOpenIddict(options =>
+            {
+                // Register the Entity Framework stores.
+                options.AddEntityFrameworkCoreStores<DbContext>();
+                // Register the ASP.NET Core MVC binder used by OpenIddict.
+                // Note: if you don't call this method, you won't be able to
+                // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
+                options.AddMvcBinders();
+                // Enable the token endpoint.
+                options.EnableTokenEndpoint("/connect/token");
+                // Enable the password flow.
+                options.AllowPasswordFlow();
+                // During development, you can disable the HTTPS requirement.
+                options.DisableHttpsRequirement();
+            });
+
             services.AddScoped<IDocumentExecuter, DocumentExecuter>();
 
             services.AddTransient<AdminRoleType>();
@@ -67,13 +100,10 @@ namespace GlownyShop.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-            {
-                Authority = "http://localhost:51000",
-                RequireHttpsMetadata = false,
-
-                ApiName = "api1"
-            });
+            app.UseOAuthValidation();
+            // Register the OpenIddict middleware.
+            app.UseOpenIddict();
+            app.UseMvcWithDefaultRoute();
 
             app.UseStaticFiles();
             app.UseMvc();

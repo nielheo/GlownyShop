@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Collections.Generic;
 
 namespace GlownyShop.Core.Logic
 {
@@ -136,6 +137,16 @@ namespace GlownyShop.Core.Logic
             else
                 return null;
                    
+        }
+
+        public IEnumerable<AdminRole> GetAdminRoles(string adminUserId)
+        {
+            var adminUser = _adminUserRepository.Get(adminUserId, "AdminUserRoles.AdminRole").Result;
+
+            if (adminUser == null)
+                return new List<AdminRole>();
+
+            return adminUser.AdminUserRoles.Select(a => a.AdminRole);
         }
     }
 }
