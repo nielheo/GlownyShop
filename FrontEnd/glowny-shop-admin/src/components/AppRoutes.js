@@ -10,10 +10,12 @@ import {
 import {grey900, cyan500} from 'material-ui/styles/colors'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-
+import { getUserToken } from '../components/Common/Cookies'
+//import EnsureLoggedInContainer from '../components/Common/EnsureLoggedInContainer'
 import Layout from '../components/Layout'
 import Home from '../components/Home'
 import Login from '../components/Login'
+import Logout from '../components/Logout'
 import NotFound from '../components/NotFound'
 import AboutUs from '../components/AboutUs'
 
@@ -35,14 +37,11 @@ class AppRoutes extends React.Component {
         <Router>
           <Layout>
             <Switch>
-              <Route path="/login" 
-                render={(props) => <Login {...props} 
-                  updateToken={this.props.updateToken} 
-                  />}
-              />
+              <Route path="/login" component={Login}/>
+              <Route path="/logout" component={Logout}/>
               <Route path="/404" component={NotFound}/>
-              <PrivateRoute path="/" component={Home} isAuthenticated={_isAuthenticated()}/>
-              <PrivateRoute path="/aboutus" component={AboutUs} isAuthenticated={_isAuthenticated()}/>
+              <PrivateRoute exact path="/" component={Home} />
+              <PrivateRoute path="/aboutus" component={AboutUs} />
               <Redirect to='/404'/>
             </Switch>
           </Layout>
@@ -52,20 +51,9 @@ class AppRoutes extends React.Component {
   }
 }
 
-const _isAuthenticated = async () => {
-  let token;
-  try {
-    token = await localStorage.getItem('token')
-  } catch (err) {
-    token = '';
-  }
-
-  return token !== null && token !== '';
-}
-
-const PrivateRoute = ({ component: Component, ...rest, isAuthenticated }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    _isAuthenticated() ? (
+    getUserToken('User_Token') ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{
@@ -76,5 +64,4 @@ const PrivateRoute = ({ component: Component, ...rest, isAuthenticated }) => (
   )}/>
 )
 
-
-export default AppRoutes//withRouter(AppRoutes)
+export default AppRoutes

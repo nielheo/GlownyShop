@@ -1,13 +1,14 @@
 'use strict';
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 import {grey900, cyan500} from 'material-ui/styles/colors'
-import Drawer from 'material-ui/Drawer';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
-import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer'
+import Menu from 'material-ui/Menu'
+import MenuItem from 'material-ui/MenuItem'
+import AppBar from 'material-ui/AppBar'
 import Header from './Header'
+import { getUserToken } from '../components/Common/Cookies'
 
 const styles = {
   container: {
@@ -45,7 +46,10 @@ export default class LayoutPage extends React.Component {
           <Menu>
             <MenuItem href='/' primaryText='Home' />
             <MenuItem href='/aboutus' primaryText='About Us' />
-            <MenuItem href='/login' primaryText='Login' />
+            { getUserToken() 
+              ? <MenuItem href='/logout' primaryText='Log Out' />
+              : <MenuItem href='/login' primaryText='Login' />
+            }
           </Menu>
         </Drawer>
         <div style={styles.container}>{this.props.children}</div>
