@@ -52,7 +52,7 @@ namespace GlownyShop.Api.Controllers
                 {
                     identity.AddClaim(OpenIdConnectConstants.Claims.Role,
                         adminRoles.Name, 
-                        OpenIdConnectConstants.Destinations.IdentityToken);
+                        OpenIdConnectConstants.Destinations.AccessToken);
                 }
                 // ... add other claims, if necessary.
                 var principal = new ClaimsPrincipal(identity);

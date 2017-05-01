@@ -83,6 +83,12 @@ namespace GlownyShop.Api
                 // During development, you can disable the HTTPS requirement.
                 options.DisableHttpsRequirement();
             });
+            
+            services.AddCors(setupAction =>
+            {
+                setupAction.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:3000"));
+            });
 
             services.AddScoped<IDocumentExecuter, DocumentExecuter>();
 
@@ -99,6 +105,11 @@ namespace GlownyShop.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                );
 
             app.UseOAuthValidation();
             // Register the OpenIddict middleware.

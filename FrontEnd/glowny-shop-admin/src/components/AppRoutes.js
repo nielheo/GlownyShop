@@ -42,7 +42,7 @@ class AppRoutes extends React.Component {
               <Route path="/404" component={NotFound}/>
               <PrivateRoute exact path="/" component={Home} />
               <PrivateRoute path="/aboutus" component={AboutUs} />
-              <Redirect to='/404'/>
+              <PrivateNotFound to='/404'/>
             </Switch>
           </Layout>
         </Router>
@@ -50,6 +50,22 @@ class AppRoutes extends React.Component {
     )
   }
 }
+
+const PrivateNotFound = ({to, ...rest }) => (
+  <Route {...rest} render={props => (
+    getUserToken('User_Token') ? (
+      <Redirect to={{
+        pathname: to,
+        state: { from: props.location }
+      }}/>
+    ) : (
+      <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (

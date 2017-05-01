@@ -38,11 +38,34 @@ export default class IndexPage extends React.Component {
     }
   }
 
-  _loginButtonClick = () => {
+  _loginButtonClick = async () => {
     this.setState({buttonClick: true})
     if (this.state.email !== '' && this.state.password !== '') {
-      setUserToken(this.state.email)
-      this.props.history.push('/')
+      let response
+      try {
+        response = await fetch('http://localhost:5555/connect/token', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: 'grant_type=password&username=superadmin@glowny-shop.com&password=P@ssw0rd', 
+          
+        })
+        .then((response) => response.json())
+      } catch (err) {
+        //this._changeLoadingStatus(false);
+        response = null;
+      }
+
+      if(response.access_token) {
+        setUserToken(response.access_token)
+        this.props.history.push('/')
+      }
+      //console.log(response.access_token)
+
+      //setUserToken(this.state.email)
+      //this.props.history.push('/')
     }
   }
 
