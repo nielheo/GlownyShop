@@ -7,6 +7,8 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from '../store/store.js'
 import {grey900, cyan500} from 'material-ui/styles/colors'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -21,9 +23,9 @@ import AboutUs from '../components/AboutUs'
 
 const muiTheme = getMuiTheme({
   palette: {
-    textColor: grey900,
-    primary1Color: grey900,
-    accent1Color: cyan500,
+    //textColor: grey900,
+    //primary1Color: grey900,
+    //accent1Color: cyan500,
   },
 })
 
@@ -33,20 +35,22 @@ class AppRoutes extends React.Component {
       /*!isLoggedIn && location.pathname !== '/login' ?
         <Redirect to='/login'/>
       :*/
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <Router>
-          <Layout>
-            <Switch>
-              <Route path="/login" component={Login}/>
-              <Route path="/logout" component={Logout}/>
-              <Route path="/404" component={NotFound}/>
-              <PrivateRoute exact path="/" component={Home} />
-              <PrivateRoute path="/aboutus" component={AboutUs} />
-              <PrivateNotFound to='/404'/>
-            </Switch>
-          </Layout>
-        </Router>
-      </MuiThemeProvider>
+      <Provider store={store}>
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <Router>
+            <Layout>
+              <Switch>
+                <Route path="/login" component={Login}/>
+                <Route path="/logout" component={Logout}/>
+                <Route path="/404" component={NotFound}/>
+                <PrivateRoute exact path="/" component={Home} />
+                <PrivateRoute path="/aboutus" component={AboutUs} />
+                <PrivateNotFound to='/404'/>
+              </Switch>
+            </Layout>
+          </Router>
+        </MuiThemeProvider>
+      </Provider>
     )
   }
 }

@@ -15,7 +15,7 @@ const styles = {
     padding: 15,
   },
   drawer: {
-    backgroundColor: '#FFD600',
+    backgroundColor: '#FFFFFF',
   },
   AppBar: {
     backgroundColor: cyan500,

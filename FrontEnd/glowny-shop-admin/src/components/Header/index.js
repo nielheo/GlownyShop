@@ -1,11 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as types from '../../actions/actionTypes.js'
+import { withRouter } from 'react-router'
 import {
   Link
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar'
+import LinearProgress from 'material-ui/LinearProgress'
 import {grey900, cyan500} from 'material-ui/styles/colors'
-import { withRouter } from 'react-router'
+
+
 
 const styles = {
   title: {
@@ -18,7 +24,10 @@ const styles = {
   }
 };
 
-class Layout extends React.Component {
+class Header extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -27,15 +36,37 @@ class Layout extends React.Component {
   render() {
     const { match, location, history } = this.props
     return (
-      location.pathname !== '/login' && location.pathname !== '/404' &&
+      <section>
+      { location.pathname !== '/login' && location.pathname !== '/404' &&
       <AppBar
         style={styles.appBar}
         title={<Link to='/' style={styles.title}>Thrive People</Link>}
         iconClassNameRight="muidocs-icon-navigation-expand-more"
         onLeftIconButtonTouchTap={this.props.onNavigationClick}
-      />
+      /> }
+      { this.props.onProgress && <LinearProgress mode="indeterminate" />
+      }
+      </section>
     )
   }
 }
 
-export default withRouter(Layout)
+const _updateHomeOnProgressAction = (onProgress) => ({
+  type: types.UPDATE_HOME_ON_PROGRESS,
+  onProgress: onProgress,
+})
+
+const dispatchToProps = (dispatch) => ({
+  _updateHomeOnProgressAction: bindActionCreators(_updateHomeOnProgressAction, dispatch),
+})
+
+const stateToProps = (state) => ({
+  onProgress: state.homeReducer.onProgress,
+})
+
+const headerRedux = connect(
+  stateToProps,
+  dispatchToProps,
+)(Header);
+
+export default withRouter(headerRedux)
