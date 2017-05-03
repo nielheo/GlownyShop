@@ -20,6 +20,7 @@ import Login from '../components/Login'
 import Logout from '../components/Logout'
 import NotFound from '../components/NotFound'
 import AboutUs from '../components/AboutUs'
+import Forgot from '../components/Forgot' 
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -42,6 +43,7 @@ class AppRoutes extends React.Component {
               <Switch>
                 <Route path="/login" component={Login}/>
                 <Route path="/logout" component={Logout}/>
+                <Route path="/forgotpassword" component={Forgot}/>
                 <Route path="/404" component={NotFound}/>
                 <PrivateRoute exact path="/" component={Home} />
                 <PrivateRoute path="/aboutus" component={AboutUs} />
@@ -57,7 +59,7 @@ class AppRoutes extends React.Component {
 
 const PrivateNotFound = ({to, ...rest }) => (
   <Route {...rest} render={props => (
-    getUserToken('User_Token') ? (
+    getUserToken() ? (
       <Redirect to={{
         pathname: to,
         state: { from: props.location }

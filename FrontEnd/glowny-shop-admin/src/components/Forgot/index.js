@@ -11,7 +11,6 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { setUserToken } from '../Common/Cookies'
 import debounce from 'lodash.debounce'
-import { backendUrl } from '../../../constants.json'
 
 const styles = {
   container: {
@@ -67,8 +66,8 @@ class Login extends React.Component {
       
     //this.setState({ buttonClick: true })
     let response
-    try { 
-      response = await fetch(backendUrl+'/connect/token', {
+    try {
+      response = await fetch('http://localhost:5555/connect/token', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -112,12 +111,11 @@ class Login extends React.Component {
     })
   }
 
-  render() {
+  render() { 
     return (
       <Paper style={styles.container}>
         <div >
-          
-          <div style={styles.header} >Login</div>
+          <div style={styles.header} >Forgot Password</div>
           <TextField
             hintText='email'
             fullWidth={true}
@@ -127,20 +125,10 @@ class Login extends React.Component {
             value={this.state.email}
             onChange={this._updateField.bind(this, 'email')}
           />
-          <TextField
-            hintText='password'
-            fullWidth={true}
-            floatingLabelText='Password'
-            errorText={ (this.state.buttonClick && this.state.password.length === 0 && 'Enter a password')
-              || this.state.passwordError }
-            onChange={this._updateField.bind(this, 'password')}
-            value={this.state.password}
-            type='password'
-          />
           <div >
-            <Link style={styles.link} to='forgotpassword'>Forgot password?</Link>
+            <Link style={styles.link} to='login'>Login</Link>
             <RaisedButton 
-              label='Login'
+              label='Reset password'
               //fullWidth={true} 
               primary={true} 
               style={styles.button}
