@@ -1,8 +1,5 @@
-'use strict';
-
 import React from 'react'
-import { Link } from 'react-router-dom'
-import {grey900, cyan500} from 'material-ui/styles/colors'
+import {cyan500} from 'material-ui/styles/colors'
 import Drawer from 'material-ui/Drawer'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
@@ -45,7 +42,7 @@ export default class LayoutPage extends React.Component {
           <AppBar iconElementLeft={<span></span>} title='Thrive People' style={styles.AppBar} />
           <Menu>
             <MenuItem href='/' primaryText='Home' />
-            <MenuItem href='/aboutus' primaryText='About Us' />
+            <MenuItem href='/users' primaryText='Users' />
             { getUserToken() 
               ? <MenuItem href='/logout' primaryText='Log Out' />
               : <MenuItem href='/login' primaryText='Login' />

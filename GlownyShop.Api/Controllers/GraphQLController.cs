@@ -1,6 +1,7 @@
 using GlownyShop.Api.Models;
 using GraphQL;
 using GraphQL.Types;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace GlownyShop.Api.Controllers
 {
     [Route("graphql")]
+    [EnableCors("AllowSpecificOrigin")]
     public class GraphQLController : Controller
     {
         private IDocumentExecuter _documentExecuter { get; set; }

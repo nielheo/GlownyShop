@@ -1,12 +1,9 @@
-'use strict';
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as types from '../../actions/actionTypes.js'
 import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
-import {yellow400} from 'material-ui/styles/colors'
-import AppBar from 'material-ui/AppBar'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { setUserToken } from '../Common/Cookies'
@@ -62,9 +59,6 @@ class Login extends React.Component {
   }
 
   _login = async () => {
-    
-      
-    //this.setState({ buttonClick: true })
     let response
     try {
       response = await fetch('http://localhost:5555/connect/token', {

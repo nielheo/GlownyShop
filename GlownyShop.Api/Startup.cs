@@ -87,7 +87,10 @@ namespace GlownyShop.Api
             services.AddCors(setupAction =>
             {
                 setupAction.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://localhost:3000"));
+                    builder => builder.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
             });
 
             services.AddScoped<IDocumentExecuter, DocumentExecuter>();
@@ -109,6 +112,8 @@ namespace GlownyShop.Api
             app.UseCors(builder =>
                 builder.WithOrigins("http://localhost:3000")
                     .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
                 );
 
             app.UseOAuthValidation();

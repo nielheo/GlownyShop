@@ -1,10 +1,17 @@
-'use strict'
 import React from 'react'
-import Relay from 'react-relay'
+import { connect } from 'react-redux'
+import { getGraph } from '../../actions/graphql.js'
 
 class Users extends React.Component {
+  componentDidMount = () => {
+    this.props.dispatch(getGraph(`{ 'query': 'query { viewer { adminUsers { id firstName lastName email isActive }}}' }`));
+  }
   render() {
-    console.log(this.props.viewer)
+    //let dispatch = this.props.dispatch
+    //let fetchInProgress = String(this.props.store.get('fetching'));
+    //let queryText;
+    //let viewer = this.props.store.get('data').toObject()
+    console.log(this.props.store.data)
     return (
       <div>
         User Management
@@ -13,21 +20,13 @@ class Users extends React.Component {
   }
 }
 
-
-
-export default Relay.createContainer(Users, {
-  fragments: {
-    viewer: () => Relay.QL`
-      fragment on Viewer {
-        adminUsers {
-          id
-          firstName
-          lastName
-          email
-          isActive
-        }
-      }
-    `,
-  },
+const mapStateToProps = (state) => ({
+  store: state.queryReducer,
 })
+
+const usersRedux = connect(
+  mapStateToProps,
+)(Users)
+
+export default usersRedux
 

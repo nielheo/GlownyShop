@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar'
 import LinearProgress from 'material-ui/LinearProgress'
-import {grey900, cyan500} from 'material-ui/styles/colors'
+import {cyan500} from 'material-ui/styles/colors'
 
 
 
@@ -25,16 +25,13 @@ const styles = {
 };
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
   }
   render() {
-    const { match, location, history } = this.props
+    const { location } = this.props
     return (
       <section>
       { location.pathname !== '/login' && location.pathname !== '/404' &&

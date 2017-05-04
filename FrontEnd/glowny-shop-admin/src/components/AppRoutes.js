@@ -2,14 +2,12 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  IndexRoute,
-  Link,
   Switch,
   Redirect
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from '../store/store.js'
-import {grey900, cyan500} from 'material-ui/styles/colors'
+//import {grey900, cyan500} from 'material-ui/styles/colors'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { getUserToken } from '../components/Common/Cookies'
@@ -20,6 +18,7 @@ import Login from '../components/Login'
 import Logout from '../components/Logout'
 import NotFound from '../components/NotFound'
 import AboutUs from '../components/AboutUs'
+import Users from '../components/Users'
 import Forgot from '../components/Forgot' 
 
 const muiTheme = getMuiTheme({
@@ -41,12 +40,13 @@ class AppRoutes extends React.Component {
           <Router>
             <Layout>
               <Switch>
-                <Route path="/login" component={Login}/>
-                <Route path="/logout" component={Logout}/>
-                <Route path="/forgotpassword" component={Forgot}/>
-                <Route path="/404" component={NotFound}/>
-                <PrivateRoute exact path="/" component={Home} />
-                <PrivateRoute path="/aboutus" component={AboutUs} />
+                <Route path='/login' component={Login}/>
+                <Route path='/logout' component={Logout}/>
+                <Route path='/forgotpassword' component={Forgot}/>
+                <Route path='/404' component={NotFound}/>
+                <PrivateRoute exact path='/' component={Home} />
+                <PrivateRoute path='/aboutus' component={AboutUs} />
+                <PrivateRoute path='/users' component={Users} />
                 <PrivateNotFound to='/404'/>
               </Switch>
             </Layout>
