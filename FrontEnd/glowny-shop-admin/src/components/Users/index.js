@@ -22,6 +22,10 @@ class Users extends React.Component {
           lastName 
           email 
           isActive 
+          adminRoles {
+            id
+            name
+          }
         }
       }`));
   }
@@ -31,7 +35,7 @@ class Users extends React.Component {
     //let queryText;
     //let viewer = this.props.store.get('data').toObject()
     //console.log(this.props.store.data)
-    const { adminUsers, fetchInProgress } = this.props.store.data
+    const { adminUsers } = this.props.store.data
     //console.log(adminUsers)
     return (
       <Table fixedHeader={true} selectable={false}>
@@ -41,6 +45,7 @@ class Users extends React.Component {
             <TableHeaderColumn>First Name</TableHeaderColumn>
             <TableHeaderColumn>Last Name</TableHeaderColumn>
             <TableHeaderColumn>Email</TableHeaderColumn>
+            <TableHeaderColumn>Role(s)</TableHeaderColumn>
             <TableHeaderColumn>Active</TableHeaderColumn>
           </TableRow>
         </TableHeader>
@@ -51,6 +56,7 @@ class Users extends React.Component {
                 <TableRowColumn>{user.firstName}</TableRowColumn>
                 <TableRowColumn>{user.lastName}</TableRowColumn>
                 <TableRowColumn>{user.email}</TableRowColumn>
+                <TableRowColumn>{user.adminRoles.map(role => role.name).join('; ')}</TableRowColumn>
                 <TableRowColumn><Toggle defaultToggled={user.isActive}/></TableRowColumn>
               </TableRow>)
           }

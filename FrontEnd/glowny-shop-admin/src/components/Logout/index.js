@@ -1,5 +1,4 @@
-'use strict';
-import React from 'react';
+import React from 'react'
 import { setUserToken } from '../Common/Cookies'
 
 export default class AboutUs extends React.Component {
@@ -12,6 +11,6 @@ export default class AboutUs extends React.Component {
       <div>
         Logging out ...
       </div>
-    );
+    )
   }
 }
