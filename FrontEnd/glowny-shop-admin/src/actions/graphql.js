@@ -14,13 +14,15 @@ const finishedRequest = (response) => {
 }
 
 export const getGraph = (payload) => {
-  console.log(payload)
+  payload = `{'query' : 'query {` + payload + `}'}`
+  //console.log(payload) 
   return dispatch => {
     dispatch(startingRequest());
     return new Promise(function(resolve, reject) {
       let request=new XMLHttpRequest();
       request.open('POST', backendUrlGraphql, true);
       request.setRequestHeader('Content-Type', 'application/json');
+      request.setRequestHeader('Accept', 'application/json');
       request.send(payload);
       request.onreadystatechange = () => {
         if (request.readyState === 4) {
